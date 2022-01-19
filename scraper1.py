@@ -1,14 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
 
-req = requests.get('https://www.geeksforgeeks.org')
+# req = requests.get('https://www.geeksforgeeks.org')
+req = requests.get('https://www.youtube.com/watch?v=QwZT7T-TXT0')
 
-soup = BeautifulSoup(req.content, "html.parser")
+# soup = BeautifulSoup(req.content, "html.parser")
+soup = BeautifulSoup(req.content, "html5lib")
+
+with open('page_output1.txt', mode='w') as file_object:
+    print(soup.prettify, file=file_object)
 
 # print(soup.prettify)
 
-# print(soup.get_text())
+# siteText = soup.get_text()
+# print(siteText)
 
-res = soup.title
+# res = soup.title
 # print(res.prettify)
-print(res.get_text())
+# print(res.get_text())
