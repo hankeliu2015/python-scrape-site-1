@@ -1,23 +1,35 @@
 import requests
 from bs4 import BeautifulSoup
-from apiclient.discovery import build
+from googleapiclient.discovery import build
 from decouple import config
 
 YOUTUBE_API_SERVICE_NAME = config('YOUTUBE_API_SERVICE_NAME')
 YOUTUBE_API_VERSION = config('YOUTUBE_API_VERSION')
 DEVELOPER_KEY = config('DEVELOPER_KEY')
+video_id = "QwZT7T-TXT0"
 
 # creating Youtube Resource Object
 youtube_object = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
                        developerKey=DEVELOPER_KEY)
 
-print(youtube_object)
 
+# create a request to get all the comments on the video
+request = youtube_object.commentThreads().list(
+    part="snippet",
+    videoId=video_id,
+    order="orderUnspecified")  # top comments.
+
+video_comments = request.execute()
+print(video_comments)
+with open('video_comments-1.txt', mode='w') as file_object:
+    print(video_comments, file=file_object)
+
+# user requests to fetch uri resource
 # req = requests.get('https://www.geeksforgeeks.org')
-req = requests.get('https://www.youtube.com/watch?v=QwZT7T-TXT0')
+# req = requests.get('https://www.youtube.com/watch?v=QwZT7T-TXT0')
 
 # soup = BeautifulSoup(req.content, "html.parser")
-soup = BeautifulSoup(req.content, "lxml")
+# soup = BeautifulSoup(req.content, "lxml")
 # soup = BeautifulSoup(req.content, "html5lib")
 
 # with open('page_output_html5lib.txt', mode='w') as file_object:
