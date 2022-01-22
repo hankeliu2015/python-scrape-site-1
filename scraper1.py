@@ -7,6 +7,8 @@ YOUTUBE_API_SERVICE_NAME = config('YOUTUBE_API_SERVICE_NAME')
 YOUTUBE_API_VERSION = config('YOUTUBE_API_VERSION')
 DEVELOPER_KEY = config('DEVELOPER_KEY')
 video_id = "QwZT7T-TXT0"
+# if recevie exceeding your quota error try a different video id.
+# video_id = "Oe421EPjeBE"
 
 # creating Youtube Resource Object
 youtube_object = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
@@ -15,14 +17,16 @@ youtube_object = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
 
 # create a request to get all the comments on the video
 request = youtube_object.commentThreads().list(
-    part="snippet",
-    videoId=video_id,
-    order="orderUnspecified")  # top comments.
+    part="id, snippet",
+    order="time",
+    textFormat="html",
+    videoId=video_id)
 
 video_comments = request.execute()
 print(video_comments)
-with open('video_comments-1.txt', mode='w') as file_object:
-    print(video_comments, file=file_object)
+
+# with open('video_comments-2.txt', mode='w') as file_object:
+#     print(video_comments-2, file=file_object)
 
 # user requests to fetch uri resource
 # req = requests.get('https://www.geeksforgeeks.org')
