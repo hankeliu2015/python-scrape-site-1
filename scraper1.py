@@ -5,7 +5,6 @@ from decouple import config
 import csv
 
 # testing csv file
-
 fields = ['User Name', 'Date | Time', 'Likes',
           'Comments', 'Numbers of Replies', 'Comment Sources']
 
@@ -18,11 +17,11 @@ rows = [['Nikhil', 'COE', '2', '9.0'],
         ['Sahil', 'EP', '2', '9.1']]
 
 # name of csv file
-filename = "csv_file_test_1.csv"
-with open(filename, 'w') as csvfile:
-    csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(fields)
-    csvwriter.writerows(rows)
+# cvs_filename = "csv_file_test_1.csv"
+# with open(cvs_filename, 'w') as csvfile:
+#     csvwriter = csv.writer(csvfile)
+#     csvwriter.writerow(fields)
+#     csvwriter.writerows(rows)
 
 ##
 # use environment variables for youtube api requests
